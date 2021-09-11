@@ -5,18 +5,12 @@ LABEL description="Apache / PHP Flexguru Server"
 
 ARG DEBIAN_FRONTEND=newt
 
-RUN apt-get -y update && apt-get install -y 
-RUN apt install -y lsb-release ca-certificates apt-transport-https software-properties-common
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list
-RUN wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add -
-RUN apt update
-RUN DEBIAN_FRONTEND='noninteractive' apt install php8.0
-RUN DEBIAN_FRONTEND='noninteractive' apt-get -y update && apt-get install -y \
+RUN apt-get -y update && apt-get install -y \
 apache2 \
+php8.0 \
 libapache2-mod-php8.0 \
 php8.0-bcmath \
 php8.0-gd \
-php8.0-json \
 php8.0-sqlite \
 php8.0-mysql \
 php8.0-curl \
@@ -24,7 +18,7 @@ php8.0-xml \
 php8.0-mbstring \
 php8.0-zip \
 mcrypt \
-nano         
+nano  
 
 RUN apt-get install locales
 RUN locale-gen fr_FR.UTF-8
