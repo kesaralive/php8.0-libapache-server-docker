@@ -1,9 +1,12 @@
 FROM ubuntu:20.04
 
 LABEL maintainer="kesaralive@gmail.com"
-LABEL description="Apache / PHP Flexguru Server"
+LABEL description="Apache / PHP development environment"
 
 ARG DEBIAN_FRONTEND=newt
+RUN apt-get update && apt-get install -y lsb-release && apt-get clean all
+RUN apt install ca-certificates apt-transport-https software-properties-common -y
+RUN add-apt-repository ppa:ondrej/php
 
 RUN apt-get -y update && apt-get install -y \
 apache2 \
@@ -18,7 +21,7 @@ php8.0-xml \
 php8.0-mbstring \
 php8.0-zip \
 mcrypt \
-nano  
+nano
 
 RUN apt-get install locales
 RUN locale-gen fr_FR.UTF-8
